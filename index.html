@@ -3,9 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Examen Tema 2: HTML, XML y CSS</title>
+    <meta name="format-detection" content="telephone=no">
     
-    <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+    <title>Examen Tema 2: HTML, XML y CSS</title>
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=inter:wght@400;500;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -23,7 +24,6 @@
         <div class="row glass-container w-100 mx-auto">
             
             <div class="col-lg-6 d-flex justify-content-center align-items-center mb-5 mb-lg-0">
-                
                 <div class="card-wrapper w-100 d-flex justify-content-center">
                     <div id="card-inner" class="credit-card-preview w-100">
                         
@@ -32,14 +32,16 @@
                                 <div class="chip"></div>
                                 <div class="visa-logo">VISA</div>
                             </div>
+                            
                             <div id="display-number" class="text-white mb-4 tracking-widest fw-medium card-number-text">4123 5678 9101 1121</div>
-                            <div class="d-flex justify-content-between text-white">
-                                <div>
-                                    <small class="d-block text-uppercase opacity-75 card-small-text">titular de la tarjeta</small>
-                                    <span id="display-name" class="text-uppercase fw-medium card-medium-text">Andres Jeriel Cruz Resendiz</span>
+                            
+                            <div class="d-flex justify-content-between text-white w-100">
+                                <div class="d-flex flex-column" style="width: 70%; overflow: hidden;">
+                                    <small class="d-block text-uppercase opacity-75 card-small-text mb-1">titular de la tarjeta</small>
+                                    <span id="display-name" class="text-uppercase fw-medium card-medium-text text-truncate d-block w-100">Andres Jeriel Cruz Resendiz</span>
                                 </div>
-                                <div class="text-end">
-                                    <small class="d-block text-uppercase opacity-75 card-small-text">expira</small>
+                                <div class="d-flex flex-column text-end" style="width: 25%;">
+                                    <small class="d-block text-uppercase opacity-75 card-small-text mb-1">expira</small>
                                     <span id="display-expiry" class="fw-medium card-medium-text">--/--</span>
                                 </div>
                             </div>
@@ -55,7 +57,6 @@
 
                     </div>
                 </div>
-
             </div>
 
             <div class="col-lg-6 px-lg-4">
