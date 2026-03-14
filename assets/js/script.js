@@ -6,9 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputyear = document.querySelector('#input-year');
     const inputcvv = document.querySelector('#input-cvv');
     
+    const cardinner = document.querySelector('#card-inner');
     const displaynumber = document.querySelector('#display-number');
     const displayname = document.querySelector('#display-name');
     const displayexpiry = document.querySelector('#display-expiry');
+    const displaycvv = document.querySelector('#display-cvv');
 
     const fechaactual = new Date();
     const mesactual = String(fechaactual.getMonth() + 1).padStart(2, '0');
@@ -40,8 +42,19 @@ document.addEventListener('DOMContentLoaded', () => {
         displayname.textContent = val.trim() || 'Andres Jeriel Cruz Resendiz';
     });
 
+    /* eventos de giro 3d para el cvv */
+    inputcvv.addEventListener('focus', () => {
+        cardinner.classList.add('is-flipped');
+    });
+
+    inputcvv.addEventListener('blur', () => {
+        cardinner.classList.remove('is-flipped');
+    });
+
     inputcvv.addEventListener('input', (e) => {
-        e.target.value = e.target.value.replace(/\D/g, '');
+        let val = e.target.value.replace(/\D/g, '');
+        e.target.value = val;
+        displaycvv.textContent = val || '***';
     });
 
     inputmonth.addEventListener('change', updateexpiry);

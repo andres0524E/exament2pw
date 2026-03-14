@@ -1,11 +1,14 @@
 :root {
-    --glass-bg: rgba(25, 26, 35, 0.6);
+    --glass-bg: rgba(25, 26, 35, 0.7);
     --glass-border: rgba(255, 255, 255, 0.08);
-    --glass-input-bg: rgba(0, 0, 0, 0.2);
+    --glass-input-bg: rgba(0, 0, 0, 0.3);
 }
 
 body {
-    background: radial-gradient(circle at top right, #2a2a35, #0f0f13);
+    /* nuevo fondo moderno blanco/negro */
+    background: linear-gradient(135deg, #050505 0%, #3a3a40 50%, #ffffff 150%);
+    background-size: cover;
+    background-attachment: fixed;
     font-family: 'inter', sans-serif;
     min-height: 100vh;
     display: flex;
@@ -17,7 +20,7 @@ body {
 }
 
 .glass-nav {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--glass-border);
@@ -30,8 +33,8 @@ footer.glass-nav {
 
 .glass-container {
     background: var(--glass-bg);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
     border: 1px solid var(--glass-border);
     border-radius: 24px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
@@ -40,33 +43,59 @@ footer.glass-nav {
     animation: fadein 0.8s ease-out;
 }
 
-/* diseño base de la tarjeta (escritorio) */
+/* --- lógica de la tarjeta 3d --- */
+.card-wrapper {
+    perspective: 1000px; 
+    max-width: 360px;
+    animation: float 5s ease-in-out infinite;
+}
+
 .credit-card-preview {
+    height: 210px; 
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.credit-card-preview.is-flipped {
+    transform: rotatey(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
     background: linear-gradient(135deg, #1c1c22, #0d0d0f);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 16px;
-    padding: 24px 30px;
-    height: 220px; 
-    width: 100%;
-    max-width: 380px;
     box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
-    animation: float 5s ease-in-out infinite;
+}
+
+.card-front {
+    padding: 24px 30px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.card-number-text {
-    font-size: 1.4rem; 
+.card-back {
+    transform: rotatey(180deg);
+    padding: 24px 0;
 }
-.card-medium-text {
-    font-size: 0.85rem; 
+
+.magnetic-stripe {
+    width: 100%;
+    height: 45px;
+    background: #000000;
+    margin-top: 25px;
 }
-.card-small-text {
-    font-size: 0.55rem; 
-}
+/* -------------------------------- */
+
+.card-number-text { font-size: 1.35rem; }
+.card-medium-text { font-size: 0.85rem; }
+.card-small-text { font-size: 0.55rem; }
 
 .chip {
     width: 44px; 
@@ -78,20 +107,20 @@ footer.glass-nav {
     box-shadow: inset 0 0 4px rgba(0,0,0,0.3), 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.chip::before, .chip::after {
+.chip::before {
     content: '';
     position: absolute;
-    border: 1px solid rgba(0,0,0,0.3);
-}
-
-.chip::before {
     top: 25%; bottom: 25%; left: 0; right: 0;
-    border-left: none; border-right: none;
+    border-top: 1px solid rgba(0,0,0,0.3);
+    border-bottom: 1px solid rgba(0,0,0,0.3);
 }
 
 .chip::after {
+    content: '';
+    position: absolute;
     left: 30%; right: 30%; top: 0; bottom: 0;
-    border-top: none; border-bottom: none;
+    border-left: 1px solid rgba(0,0,0,0.3);
+    border-right: 1px solid rgba(0,0,0,0.3);
 }
 
 .visa-logo {
@@ -103,6 +132,7 @@ footer.glass-nav {
     text-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
+/* nuevos brillos de interaccion en los inputs */
 .glass-input {
     background: var(--glass-input-bg);
     border: 1px solid var(--glass-border);
@@ -111,38 +141,35 @@ footer.glass-nav {
     transition: all 0.3s ease;
 }
 
+.glass-input:hover {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
 .glass-input:focus {
-    background: rgba(0, 0, 0, 0.4);
-    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.6);
     color: #fff;
-    box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
 }
 
-.glass-input::placeholder {
-    color: rgba(255, 255, 255, 0.2);
-}
-
-select.glass-input option {
-    background: #1e1e24;
-    color: #fff;
-}
+.glass-input::placeholder { color: rgba(255, 255, 255, 0.2); }
+select.glass-input option { background: #1e1e24; color: #fff; }
 
 .btn-glass {
     background: #ffffff;
     border: 1px solid #ffffff;
     color: #000000;
-    border-radius: 12px; /* bordes más redondeados para toque premium */
-    font-weight: 600;
-    letter-spacing: 0.5px;
+    border-radius: 8px;
     transition: all 0.3s ease;
 }
 
-.btn-glass:hover, .btn-glass:active {
+.btn-glass:hover {
     background: #000000;
     color: #ffffff;
     border-color: #000000;
     transform: translatey(-2px);
-    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15); 
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.15); 
 }
 
 @keyframes fadein {
@@ -156,73 +183,13 @@ select.glass-input option {
     100% { transform: translatey(0px); }
 }
 
-
-/* =========================================================
-   vista móvil premium (modo app nativa)
-   ========================================================= */
-@media (max-width: 768px) {
-    
-    /* quitamos márgenes y bordes para que se funda con el fondo del teléfono */
+/* media query para responsividad móvil estricta */
+@media (max-width: 576px) {
     .glass-container {
-        border: none;
-        border-radius: 0;
-        background: transparent;
-        box-shadow: none;
-        padding: 10px 15px;
-        margin-top: 10px !important;
+        padding: 20px;
     }
-
-    /* tarjeta con proporciones matemáticas inquebrantables */
-    .credit-card-preview {
-        max-width: 100%;
-        height: auto;
-        aspect-ratio: 1.586 / 1; /* proporción oficial de una tarjeta real */
-        padding: 6vw; /* padding relativo al ancho de la pantalla */
-        margin-bottom: 30px;
-    }
-
-    /* tipografía fluida: se ajusta perfectamente al ancho de la tarjeta */
-    .card-number-text {
-        font-size: 6.5vw; /* tamaño basado en el viewport */
-        letter-spacing: 0.05em; 
-        white-space: nowrap; 
-        margin-bottom: 0 !important;
-    }
-
-    /* control estricto del nombre largo */
-    .card-medium-text {
-        font-size: 3.5vw;
-        max-width: 50vw; /* solo puede ocupar la mitad de la pantalla */
-        white-space: nowrap; 
-        overflow: hidden; 
-        text-overflow: ellipsis; /* agrega "..." si el nombre es muy largo */
-        display: inline-block;
-        vertical-align: bottom;
-    }
-
-    .card-small-text {
-        font-size: 2vw;
-    }
-    
-    .chip {
-        width: 11vw;
-        height: 8vw;
-    }
-
-    .visa-logo {
-        font-size: 6vw;
-    }
-
-    /* ajustes ergonómicos del formulario para pulgares */
-    .glass-input {
-        padding: 14px 15px; /* inputs más altos y cómodos de tocar */
-        font-size: 1rem; /* evita que el iphone haga zoom al escribir */
-        border-radius: 10px;
-    }
-
-    .btn-glass {
-        padding: 16px !important; /* botón gigante al final */
-        font-size: 1.1rem;
-        margin-top: 20px;
+    .card-wrapper {
+        transform: scale(0.85); /* encoge la tarjeta en pantallas chicas */
+        margin-bottom: -15px; 
     }
 }
