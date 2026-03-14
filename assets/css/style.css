@@ -5,7 +5,10 @@
 }
 
 body {
-    background: radial-gradient(circle at top right, #2a2a35, #0f0f13);
+    background-image: linear-gradient(rgba(15, 15, 19, 0.85), rgba(42, 42, 53, 0.85)), url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     font-family: 'inter', sans-serif;
     min-height: 100vh;
     display: flex;
@@ -21,7 +24,12 @@ body {
     background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-top: 1px solid var(--glass-border); /* borde arriba para el footer */
+    border-bottom: 1px solid var(--glass-border);
+}
+
+footer.glass-nav {
+    border-bottom: none;
+    border-top: 1px solid var(--glass-border);
 }
 
 /* contenedor principal oscuro */
@@ -45,26 +53,26 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 16px;
     padding: 24px 30px;
-    height: 210px; /* un poco menos alta para ajustarse al texto menor */
+    height: 210px; 
     max-width: 360px;
     box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
     animation: float 5s ease-in-out infinite;
 }
 
-/* ajustes de tipografía para la tarjeta */
+/* ajustes de tipografía por defecto para la tarjeta (pantallas grandes) */
 .card-number-text {
-    font-size: 1.35rem; /* tamaño reducido para los números */
+    font-size: 1.35rem; 
 }
 .card-medium-text {
-    font-size: 0.85rem; /* tamaño reducido para el nombre y fecha */
+    font-size: 0.85rem; 
 }
 .card-small-text {
-    font-size: 0.55rem; /* tamaño reducido para las etiquetas pequeñas */
+    font-size: 0.55rem; 
 }
 
 /* chip realista con css */
 .chip {
-    width: 44px; /* ligeramente más pequeño */
+    width: 44px; 
     height: 32px;
     background: linear-gradient(135deg, #fceab2, #d4af37, #c19b2e);
     border-radius: 6px;
@@ -137,7 +145,7 @@ select.glass-input option {
     color: #ffffff;
     border-color: #000000;
     transform: translatey(-2px);
-    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.15); /* sombra sutil clara */
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.15); 
 }
 
 /* animaciones */
@@ -150,4 +158,39 @@ select.glass-input option {
     0% { transform: translatey(0px); }
     50% { transform: translatey(-6px); }
     100% { transform: translatey(0px); }
+}
+
+/* ----- ESTO ES LO NUEVO: Sección responsive para dispositivos móviles ----- */
+/* Se activa cuando la pantalla tiene un ancho máximo de 576px (típico de un celular) */
+@media (max-width: 576px) {
+    
+    /* reducimos el padding interno de la tarjeta para ganar espacio */
+    .credit-card-preview {
+        padding: 15px 20px;
+        /* permitimos que la altura se ajuste al contenido si es necesario */
+        height: auto; 
+        min-height: 180px; /* pero establecemos una altura mínima para mantener la forma */
+    }
+
+    /* REDUCIMOS significativamente el tamaño de las fuentes para que quepan */
+    
+    .card-number-text {
+        font-size: 1rem; /* reducimos el número de tarjeta (era 1.35rem) */
+        margin-bottom: 1rem !important; /* ajustamos margen inferior */
+    }
+    .card-medium-text {
+        font-size: 0.65rem; /* reducimos el nombre y fecha (era 0.85rem) */
+    }
+    .card-small-text {
+        font-size: 0.45rem; /* reducimos las etiquetas pequeñas (era 0.55rem) */
+    }
+    
+    /* reducimos ligeramente el tamaño del chip y logo para equilibrar */
+    .chip {
+        width: 38px;
+        height: 28px;
+    }
+    .visa-logo {
+        font-size: 1.2rem;
+    }
 }
