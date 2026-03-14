@@ -5,10 +5,8 @@
 }
 
 body {
-    background-image: linear-gradient(rgba(15, 15, 19, 0.85), rgba(42, 42, 53, 0.85)), url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000&auto=format&fit=crop');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    /* CORREGIDO: Volvemos al fondo oscuro profesional radial */
+    background: radial-gradient(circle at top right, #2a2a35, #0f0f13);
     font-family: 'inter', sans-serif;
     min-height: 100vh;
     display: flex;
@@ -160,8 +158,8 @@ select.glass-input option {
     100% { transform: translatey(0px); }
 }
 
-/* ----- ESTO ES LO NUEVO: Sección responsive para dispositivos móviles ----- */
-/* Se activa cuando la pantalla tiene un ancho máximo de 576px (típico de un celular) */
+/* ----- MANTENIDO: Sección responsive para dispositivos móviles ----- */
+/* Se activa cuando la pantalla tiene un ancho máximo de 576px */
 @media (max-width: 576px) {
     
     /* reducimos el padding interno de la tarjeta para ganar espacio */
@@ -169,11 +167,10 @@ select.glass-input option {
         padding: 15px 20px;
         /* permitimos que la altura se ajuste al contenido si es necesario */
         height: auto; 
-        min-height: 180px; /* pero establecemos una altura mínima para mantener la forma */
+        min-height: 180px; 
     }
 
     /* REDUCIMOS significativamente el tamaño de las fuentes para que quepan */
-    
     .card-number-text {
         font-size: 1rem; /* reducimos el número de tarjeta (era 1.35rem) */
         margin-bottom: 1rem !important; /* ajustamos margen inferior */
