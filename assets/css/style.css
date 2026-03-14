@@ -5,7 +5,6 @@
 }
 
 body {
-    /* CORREGIDO: Volvemos al fondo oscuro profesional radial */
     background: radial-gradient(circle at top right, #2a2a35, #0f0f13);
     font-family: 'inter', sans-serif;
     min-height: 100vh;
@@ -17,7 +16,6 @@ body {
     letter-spacing: 0.12em;
 }
 
-/* utilidades oscuras generales */
 .glass-nav {
     background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(12px);
@@ -30,7 +28,6 @@ footer.glass-nav {
     border-top: 1px solid var(--glass-border);
 }
 
-/* contenedor principal oscuro */
 .glass-container {
     background: var(--glass-bg);
     backdrop-filter: blur(20px);
@@ -43,7 +40,7 @@ footer.glass-nav {
     animation: fadein 0.8s ease-out;
 }
 
-/* tarjeta interactiva estilo imagen - negra y formal */
+/* diseño base de la tarjeta (escritorio) */
 .credit-card-preview {
     background: linear-gradient(135deg, #1c1c22, #0d0d0f);
     backdrop-filter: blur(25px);
@@ -51,15 +48,18 @@ footer.glass-nav {
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 16px;
     padding: 24px 30px;
-    height: 210px; 
-    max-width: 360px;
+    height: 220px; 
+    width: 100%;
+    max-width: 380px;
     box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
     animation: float 5s ease-in-out infinite;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-/* ajustes de tipografía por defecto para la tarjeta (pantallas grandes) */
 .card-number-text {
-    font-size: 1.35rem; 
+    font-size: 1.4rem; 
 }
 .card-medium-text {
     font-size: 0.85rem; 
@@ -68,7 +68,6 @@ footer.glass-nav {
     font-size: 0.55rem; 
 }
 
-/* chip realista con css */
 .chip {
     width: 44px; 
     height: 32px;
@@ -79,23 +78,22 @@ footer.glass-nav {
     box-shadow: inset 0 0 4px rgba(0,0,0,0.3), 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.chip::before {
+.chip::before, .chip::after {
     content: '';
     position: absolute;
+    border: 1px solid rgba(0,0,0,0.3);
+}
+
+.chip::before {
     top: 25%; bottom: 25%; left: 0; right: 0;
-    border-top: 1px solid rgba(0,0,0,0.3);
-    border-bottom: 1px solid rgba(0,0,0,0.3);
+    border-left: none; border-right: none;
 }
 
 .chip::after {
-    content: '';
-    position: absolute;
     left: 30%; right: 30%; top: 0; bottom: 0;
-    border-left: 1px solid rgba(0,0,0,0.3);
-    border-right: 1px solid rgba(0,0,0,0.3);
+    border-top: none; border-bottom: none;
 }
 
-/* logo visa */
 .visa-logo {
     font-size: 1.5rem;
     font-weight: 800;
@@ -105,17 +103,17 @@ footer.glass-nav {
     text-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-/* inputs del formulario modo oscuro */
 .glass-input {
     background: var(--glass-input-bg);
     border: 1px solid var(--glass-border);
     color: #fff;
     font-size: 0.95rem;
+    transition: all 0.3s ease;
 }
 
 .glass-input:focus {
     background: rgba(0, 0, 0, 0.4);
-    border-color: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.4);
     color: #fff;
     box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.05);
 }
@@ -129,24 +127,24 @@ select.glass-input option {
     color: #fff;
 }
 
-/* botón de pago blanco a negro */
 .btn-glass {
     background: #ffffff;
     border: 1px solid #ffffff;
     color: #000000;
-    border-radius: 8px;
+    border-radius: 12px; /* bordes más redondeados para toque premium */
+    font-weight: 600;
+    letter-spacing: 0.5px;
     transition: all 0.3s ease;
 }
 
-.btn-glass:hover {
+.btn-glass:hover, .btn-glass:active {
     background: #000000;
     color: #ffffff;
     border-color: #000000;
     transform: translatey(-2px);
-    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.15); 
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15); 
 }
 
-/* animaciones */
 @keyframes fadein {
     from { opacity: 0; transform: translatey(20px); }
     to { opacity: 1; transform: translatey(0); }
@@ -158,36 +156,73 @@ select.glass-input option {
     100% { transform: translatey(0px); }
 }
 
-/* ----- MANTENIDO: Sección responsive para dispositivos móviles ----- */
-/* Se activa cuando la pantalla tiene un ancho máximo de 576px */
-@media (max-width: 576px) {
+
+/* =========================================================
+   vista móvil premium (modo app nativa)
+   ========================================================= */
+@media (max-width: 768px) {
     
-    /* reducimos el padding interno de la tarjeta para ganar espacio */
-    .credit-card-preview {
-        padding: 15px 20px;
-        /* permitimos que la altura se ajuste al contenido si es necesario */
-        height: auto; 
-        min-height: 180px; 
+    /* quitamos márgenes y bordes para que se funda con el fondo del teléfono */
+    .glass-container {
+        border: none;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+        padding: 10px 15px;
+        margin-top: 10px !important;
     }
 
-    /* REDUCIMOS significativamente el tamaño de las fuentes para que quepan */
+    /* tarjeta con proporciones matemáticas inquebrantables */
+    .credit-card-preview {
+        max-width: 100%;
+        height: auto;
+        aspect-ratio: 1.586 / 1; /* proporción oficial de una tarjeta real */
+        padding: 6vw; /* padding relativo al ancho de la pantalla */
+        margin-bottom: 30px;
+    }
+
+    /* tipografía fluida: se ajusta perfectamente al ancho de la tarjeta */
     .card-number-text {
-        font-size: 1rem; /* reducimos el número de tarjeta (era 1.35rem) */
-        margin-bottom: 1rem !important; /* ajustamos margen inferior */
+        font-size: 6.5vw; /* tamaño basado en el viewport */
+        letter-spacing: 0.05em; 
+        white-space: nowrap; 
+        margin-bottom: 0 !important;
     }
+
+    /* control estricto del nombre largo */
     .card-medium-text {
-        font-size: 0.65rem; /* reducimos el nombre y fecha (era 0.85rem) */
+        font-size: 3.5vw;
+        max-width: 50vw; /* solo puede ocupar la mitad de la pantalla */
+        white-space: nowrap; 
+        overflow: hidden; 
+        text-overflow: ellipsis; /* agrega "..." si el nombre es muy largo */
+        display: inline-block;
+        vertical-align: bottom;
     }
+
     .card-small-text {
-        font-size: 0.45rem; /* reducimos las etiquetas pequeñas (era 0.55rem) */
+        font-size: 2vw;
     }
     
-    /* reducimos ligeramente el tamaño del chip y logo para equilibrar */
     .chip {
-        width: 38px;
-        height: 28px;
+        width: 11vw;
+        height: 8vw;
     }
+
     .visa-logo {
-        font-size: 1.2rem;
+        font-size: 6vw;
+    }
+
+    /* ajustes ergonómicos del formulario para pulgares */
+    .glass-input {
+        padding: 14px 15px; /* inputs más altos y cómodos de tocar */
+        font-size: 1rem; /* evita que el iphone haga zoom al escribir */
+        border-radius: 10px;
+    }
+
+    .btn-glass {
+        padding: 16px !important; /* botón gigante al final */
+        font-size: 1.1rem;
+        margin-top: 20px;
     }
 }
