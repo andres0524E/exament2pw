@@ -113,6 +113,7 @@ footer.glass-nav {
 .card-number-text { 
     font-size: 1.35rem; 
     white-space: nowrap; 
+    overflow: visible; 
 }
 .card-medium-text { 
     font-size: 0.85rem; 
@@ -147,7 +148,6 @@ footer.glass-nav {
     border-right: 1px solid rgba(0,0,0,0.3);
 }
 
-/* ajustamos la clase de visa-logo para el nuevo icono */
 .visa-logo {
     font-size: 2.2rem;
     color: #fff;
@@ -288,5 +288,23 @@ select.glass-input option { background: #1e1e24; color: #fff; }
     }
     .card-number-text {
         font-size: 1.15rem;
+        letter-spacing: 0.1em; 
     }
 }
+
+/* --- SOLUCIÓN: atrapar celulares anchos en horizontal y reducir espaciado --- */
+@media (max-width: 950px) and (orientation: landscape) {
+    .glass-container {
+        padding: 15px;
+    }
+    .card-wrapper {
+        transform: scale(0.85); 
+        transform-origin: center center;
+        margin-bottom: 0;
+    }
+    .card-number-text {
+        font-size: 1.05rem; /* un poco mas chico */
+        letter-spacing: 0.08em; /* menos espacio entre numeros para que no desborde */
+    }
+}
+/* ----------------------------------------------------------------------------- */
