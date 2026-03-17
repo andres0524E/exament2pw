@@ -19,7 +19,8 @@ body::before {
     content: '';
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background-image: url('/assets/img/fondo.png'); 
+    /* ruta relativa infalible para github y hostinger */
+    background-image: url('../img/fondo.png'); 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -195,11 +196,9 @@ select.glass-input option { background: #1e1e24; color: #fff; }
     box-shadow: 0 5px 15px rgba(255, 255, 255, 0.15); 
 }
 
-/* --- estilos del modal de éxito --- */
 .modal-overlay {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    /* fondo oscuro que desenfoca la página atrás */
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
@@ -207,7 +206,6 @@ select.glass-input option { background: #1e1e24; color: #fff; }
     display: flex;
     justify-content: center;
     align-items: center;
-    /* oculto por defecto */
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.4s ease;
@@ -230,7 +228,6 @@ select.glass-input option { background: #1e1e24; color: #fff; }
     max-width: 90%;
     width: 320px;
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-    /* animación de entrada */
     transform: translatey(30px);
     transition: transform 0.4s cubic-bezier(0.4, 0.2, 0.2, 1);
 }
@@ -245,7 +242,6 @@ select.glass-input option { background: #1e1e24; color: #fff; }
     right: 20px;
     background: none;
     border: none;
-    /* color tenue para la x */
     color: rgba(255, 255, 255, 0.3);
     font-size: 1.5rem;
     cursor: pointer;
@@ -271,7 +267,6 @@ select.glass-input option { background: #1e1e24; color: #fff; }
     font-size: 2rem;
     margin: 0 auto 20px auto;
 }
-/* ---------------------------------- */
 
 @keyframes fadein {
     from { opacity: 0; transform: translatey(20px); }
