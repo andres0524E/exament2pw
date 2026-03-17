@@ -19,7 +19,6 @@ body::before {
     content: '';
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    /* ruta relativa infalible para github y hostinger */
     background-image: url('../img/fondo.png'); 
     background-size: cover;
     background-position: center;
@@ -148,12 +147,11 @@ footer.glass-nav {
     border-right: 1px solid rgba(0,0,0,0.3);
 }
 
+/* ajustamos la clase de visa-logo para el nuevo icono */
 .visa-logo {
-    font-size: 1.5rem;
-    font-weight: 800;
-    font-style: italic;
+    font-size: 2.2rem;
     color: #fff;
-    letter-spacing: 1px;
+    line-height: 1;
     text-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 

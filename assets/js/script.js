@@ -59,22 +59,18 @@ document.addEventListener('DOMContentLoaded', () => {
     inputmonth.addEventListener('change', updateexpiry);
     inputyear.addEventListener('change', updateexpiry);
 
-    /* --- lógica del modal de éxito --- */
     const btnpay = document.querySelector('#btn-pay');
     const successmodal = document.querySelector('#success-modal');
     const closemodal = document.querySelector('#close-modal');
 
-    // abrir el modal al hacer clic en pagar
     btnpay.addEventListener('click', () => {
         successmodal.classList.add('active');
     });
 
-    // cerrar el modal con la 'x'
     closemodal.addEventListener('click', () => {
         successmodal.classList.remove('active');
     });
 
-    // cerrar el modal si se hace clic fuera de la caja
     successmodal.addEventListener('click', (e) => {
         if (e.target === successmodal) {
             successmodal.classList.remove('active');
