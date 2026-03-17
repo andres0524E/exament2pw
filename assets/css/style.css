@@ -1,17 +1,29 @@
 :root {
-    --glass-bg: rgba(25, 26, 35, 0.7);
-    --glass-border: rgba(255, 255, 255, 0.08);
-    --glass-input-bg: rgba(0, 0, 0, 0.3);
+    --glass-bg: rgba(25, 26, 35, 0.35); 
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-input-bg: rgba(0, 0, 0, 0.2);
 }
 
 body {
-    background: linear-gradient(135deg, #050505 0%, #3a3a40 50%, #ffffff 150%);
-    background-size: cover;
-    background-attachment: fixed;
     font-family: 'inter', sans-serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    position: relative;
+    z-index: 0;
+    background-color: #050505; 
+    overflow-x: hidden; 
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url('/assets/img/fondo.png'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -2;
 }
 
 .tracking-widest {
@@ -32,11 +44,11 @@ footer.glass-nav {
 
 .glass-container {
     background: var(--glass-bg);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
     border: 1px solid var(--glass-border);
     border-radius: 24px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
     padding: 40px;
     max-width: 900px;
     animation: fadein 0.8s ease-out;
@@ -44,6 +56,7 @@ footer.glass-nav {
 
 .card-wrapper {
     perspective: 1000px; 
+    -webkit-perspective: 1000px;
     max-width: 360px;
     animation: float 5s ease-in-out infinite;
 }
@@ -54,6 +67,7 @@ footer.glass-nav {
     transform-style: preserve-3d;
     -webkit-transform-style: preserve-3d; 
     transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+    -webkit-transition: -webkit-transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
 }
 
 .credit-card-preview.is-flipped {
@@ -63,8 +77,7 @@ footer.glass-nav {
 
 .card-front, .card-back {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0; width: 100%; height: 100%;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     background: linear-gradient(135deg, #1c1c22, #0d0d0f);
@@ -80,12 +93,14 @@ footer.glass-nav {
     justify-content: space-between;
     transform: rotatey(0deg);
     -webkit-transform: rotatey(0deg);
+    z-index: 2;
 }
 
 .card-back {
     transform: rotatey(180deg);
     -webkit-transform: rotatey(180deg);
     padding: 24px 0;
+    z-index: 1;
 }
 
 .magnetic-stripe {
@@ -179,6 +194,84 @@ select.glass-input option { background: #1e1e24; color: #fff; }
     transform: translatey(-2px);
     box-shadow: 0 5px 15px rgba(255, 255, 255, 0.15); 
 }
+
+/* --- estilos del modal de éxito --- */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    /* fondo oscuro que desenfoca la página atrás */
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* oculto por defecto */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.glass-modal {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 40px 30px;
+    text-align: center;
+    position: relative;
+    max-width: 90%;
+    width: 320px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    /* animación de entrada */
+    transform: translatey(30px);
+    transition: transform 0.4s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.modal-overlay.active .glass-modal {
+    transform: translatey(0);
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    /* color tenue para la x */
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    padding: 0;
+    line-height: 1;
+}
+
+.close-btn:hover {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.success-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(76, 175, 80, 0.15);
+    border: 1px solid rgba(76, 175, 80, 0.4);
+    color: #4caf50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    margin: 0 auto 20px auto;
+}
+/* ---------------------------------- */
 
 @keyframes fadein {
     from { opacity: 0; transform: translatey(20px); }

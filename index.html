@@ -23,7 +23,7 @@
     <main class="container d-flex flex-column justify-content-center align-items-center flex-grow-1 my-5">
         <div class="row glass-container w-100 mx-auto">
             
-            <div class="col-lg-6 d-flex justify-content-center align-items-center mb-5 mb-lg-0">
+            <div class="col-md-6 d-flex justify-content-center align-items-center mb-5 mb-md-0">
                 <div class="card-wrapper w-100 d-flex justify-content-center">
                     <div id="card-inner" class="credit-card-preview w-100">
                         
@@ -59,8 +59,8 @@
                 </div>
             </div>
 
-            <div class="col-lg-6 px-lg-4">
-                <h4 class="text-white mb-4 fw-semibold">Datos de la tarjeta de Débito o Crédito</h4>
+            <div class="col-md-6 px-md-4">
+                <h4 class="text-white mb-4 fw-semibold">Detalles de Pago</h4>
                 <form id="payment-form">
                     <div class="mb-3">
                         <label class="form-label text-white-50 small">Número de tarjeta</label>
@@ -108,7 +108,7 @@
                             <input type="text" id="input-cvv" class="form-control glass-input" placeholder="123" maxlength="4">
                         </div>
                     </div>
-                    <button type="button" class="btn btn-glass w-100 py-3 fw-medium mt-2">Pagar ahora</button>
+                    <button type="button" id="btn-pay" class="btn btn-glass w-100 py-3 fw-medium mt-2">Pagar ahora</button>
                 </form>
             </div>
         </div>
@@ -117,6 +117,15 @@
     <footer class="glass-nav p-3 text-center text-white-50 mt-auto">
         <small>Desarrollado por: Andres Jeriel Cruz Resendiz | Prog web</small>
     </footer>
+
+    <div id="success-modal" class="modal-overlay">
+        <div class="glass-modal">
+            <button id="close-modal" class="close-btn">&times;</button>
+            <div class="success-icon">✓</div>
+            <h5 class="text-white fw-semibold mb-2">¡Pago exitoso!</h5>
+            <p class="text-white-50 small m-0">Tu pago ha sido generado con éxito.</p>
+        </div>
+    </div>
 
     <script src="assets/js/script.js"></script>
 </body>
